@@ -1,0 +1,11 @@
+{
+  "name": "dkp-log",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "parse": "node parse-log.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0"
+  }
+}
