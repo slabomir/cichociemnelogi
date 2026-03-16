@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,7 +20,7 @@
         --dkp-up: #3fb950;
         --dkp-down: #f85149;
         --radius: 8px;
-        --font: 'Segoe UI', system-ui, sans-serif;
+        --font: "Segoe UI", system-ui, sans-serif;
       }
 
       * {
@@ -108,7 +108,9 @@
         font-weight: 500;
         cursor: pointer;
         border: 1px solid transparent;
-        transition: opacity 0.15s, border-color 0.15s;
+        transition:
+          opacity 0.15s,
+          border-color 0.15s;
       }
 
       .action-tag:hover {
@@ -120,11 +122,26 @@
         box-shadow: 0 0 0 1px currentColor;
       }
 
-      .action-tag.looting { background: rgba(126, 231, 135, 0.15); color: var(--loot); }
-      .action-tag.bidding { background: rgba(210, 168, 255, 0.15); color: var(--bid); }
-      .action-tag.winning { background: rgba(255, 166, 87, 0.15); color: var(--win); }
-      .action-tag.dkp-increase { background: rgba(63, 185, 80, 0.15); color: var(--dkp-up); }
-      .action-tag.dkp-decrease { background: rgba(248, 81, 73, 0.15); color: var(--dkp-down); }
+      .action-tag.looting {
+        background: rgba(126, 231, 135, 0.15);
+        color: var(--loot);
+      }
+      .action-tag.bidding {
+        background: rgba(210, 168, 255, 0.15);
+        color: var(--bid);
+      }
+      .action-tag.winning {
+        background: rgba(255, 166, 87, 0.15);
+        color: var(--win);
+      }
+      .action-tag.dkp-increase {
+        background: rgba(63, 185, 80, 0.15);
+        color: var(--dkp-up);
+      }
+      .action-tag.dkp-decrease {
+        background: rgba(248, 81, 73, 0.15);
+        color: var(--dkp-down);
+      }
 
       .log-meta {
         font-size: 0.8125rem;
@@ -179,8 +196,12 @@
         text-align: right;
       }
 
-      .log-entry .dkp.positive { color: var(--dkp-up); }
-      .log-entry .dkp.negative { color: var(--dkp-down); }
+      .log-entry .dkp.positive {
+        color: var(--dkp-up);
+      }
+      .log-entry .dkp.negative {
+        color: var(--dkp-down);
+      }
 
       .log-entry .tags {
         grid-column: 2 / -1;
@@ -197,11 +218,26 @@
         font-weight: 500;
       }
 
-      .log-entry .tag.looting { background: rgba(126, 231, 135, 0.2); color: var(--loot); }
-      .log-entry .tag.bidding { background: rgba(210, 168, 255, 0.2); color: var(--bid); }
-      .log-entry .tag.winning { background: rgba(255, 166, 87, 0.2); color: var(--win); }
-      .log-entry .tag.dkp-increase { background: rgba(63, 185, 80, 0.2); color: var(--dkp-up); }
-      .log-entry .tag.dkp-decrease { background: rgba(248, 81, 73, 0.2); color: var(--dkp-down); }
+      .log-entry .tag.looting {
+        background: rgba(126, 231, 135, 0.2);
+        color: var(--loot);
+      }
+      .log-entry .tag.bidding {
+        background: rgba(210, 168, 255, 0.2);
+        color: var(--bid);
+      }
+      .log-entry .tag.winning {
+        background: rgba(255, 166, 87, 0.2);
+        color: var(--win);
+      }
+      .log-entry .tag.dkp-increase {
+        background: rgba(63, 185, 80, 0.2);
+        color: var(--dkp-up);
+      }
+      .log-entry .tag.dkp-decrease {
+        background: rgba(248, 81, 73, 0.2);
+        color: var(--dkp-down);
+      }
 
       .empty-state {
         padding: 3rem 1.5rem;
@@ -230,11 +266,25 @@
         <div class="filter-group">
           <label>Actions</label>
           <div class="action-tags" id="action-tags">
-            <span class="action-tag looting active" data-type="looting">Looting</span>
-            <span class="action-tag bidding active" data-type="bidding">Bidding</span>
-            <span class="action-tag winning active" data-type="winning">Winning</span>
-            <span class="action-tag dkp-increase active" data-type="dkp-increase">DKP +</span>
-            <span class="action-tag dkp-decrease active" data-type="dkp-decrease">DKP -</span>
+            <span class="action-tag looting active" data-type="looting"
+              >Looting</span
+            >
+            <span class="action-tag bidding active" data-type="bidding"
+              >Bidding</span
+            >
+            <span class="action-tag winning active" data-type="winning"
+              >Winning</span
+            >
+            <span
+              class="action-tag dkp-increase active"
+              data-type="dkp-increase"
+              >DKP +</span
+            >
+            <span
+              class="action-tag dkp-decrease active"
+              data-type="dkp-decrease"
+              >DKP -</span
+            >
           </div>
         </div>
       </div>
@@ -246,22 +296,34 @@
 
     <script>
       (function () {
-        const ACTION_TYPES = ['looting', 'bidding', 'winning', 'dkp-increase', 'dkp-decrease'];
+        const ACTION_TYPES = [
+          "looting",
+          "bidding",
+          "winning",
+          "dkp-increase",
+          "dkp-decrease",
+        ];
 
         function getEntryTags(entry) {
           const tags = [];
-          const d = (entry.description || '').toLowerCase();
+          const d = (entry.description || "").toLowerCase();
           const dkp = entry.dkpChange;
 
-          if (d.startsWith('loots [')) tags.push('looting');
-          if (d.includes('bets for [') || d.includes('bidding started') || (d.includes('bidding for') && d.includes('cancelled'))) tags.push('bidding');
-          if (d.startsWith('wins the bidding')) tags.push('winning');
-          if (dkp !== null && dkp > 0) tags.push('dkp-increase');
-          if (d.includes('[raid award] gains')) tags.push('dkp-increase');
-          if (dkp !== null && dkp < 0) tags.push('dkp-decrease');
-          if (d.includes('purchases [') && d.includes('dkp')) tags.push('dkp-decrease');
+          if (d.startsWith("loots [")) tags.push("looting");
+          if (
+            d.includes("bets for [") ||
+            d.includes("bidding started") ||
+            (d.includes("bidding for") && d.includes("cancelled"))
+          )
+            tags.push("bidding");
+          if (d.startsWith("wins the bidding")) tags.push("winning");
+          if (dkp !== null && dkp > 0) tags.push("dkp-increase");
+          if (d.includes("[raid award] gains")) tags.push("dkp-increase");
+          if (dkp !== null && dkp < 0) tags.push("dkp-decrease");
+          if (d.includes("purchases [") && d.includes("dkp"))
+            tags.push("dkp-decrease");
 
-          return tags;
+          return Array.from(new Set(tags));
         }
 
         function buildPlayerOptions(entries) {
@@ -270,8 +332,8 @@
         }
 
         function renderEntries(entries, playerFilter, activeActions) {
-          const listEl = document.getElementById('log-list');
-          const metaEl = document.getElementById('log-meta');
+          const listEl = document.getElementById("log-list");
+          const metaEl = document.getElementById("log-meta");
 
           let filtered = entries;
           if (playerFilter) {
@@ -284,82 +346,119 @@
             });
           }
 
-          metaEl.textContent = filtered.length === entries.length
-            ? entries.length + ' entries'
-            : filtered.length + ' of ' + entries.length + ' entries';
+          metaEl.textContent =
+            filtered.length === entries.length
+              ? entries.length + " entries"
+              : filtered.length + " of " + entries.length + " entries";
 
           if (filtered.length === 0) {
-            listEl.innerHTML = '<div class="empty-state">No entries match the current filters.</div>';
+            listEl.innerHTML =
+              '<div class="empty-state">No entries match the current filters.</div>';
             return;
           }
 
-          listEl.innerHTML = filtered.map((entry) => {
-            const tags = getEntryTags(entry);
-            const dkp = entry.dkpChange;
-            const dkpClass = dkp !== null ? (dkp > 0 ? 'positive' : 'negative') : '';
-            const dkpStr = dkp !== null ? (dkp > 0 ? '+' + dkp : String(dkp)) : '';
+          listEl.innerHTML = filtered
+            .map((entry) => {
+              const tags = getEntryTags(entry);
+              const dkp = entry.dkpChange;
+              const dkpClass =
+                dkp !== null ? (dkp > 0 ? "positive" : "negative") : "";
+              const dkpStr =
+                dkp !== null ? (dkp > 0 ? "+" + dkp : String(dkp)) : "";
 
-            const tagSpans = tags.map((t) => '<span class="tag ' + t + '">' + t.replace('-', ' ') + '</span>').join('');
+              const tagSpans = tags
+                .map(
+                  (t) =>
+                    '<span class="tag ' +
+                    t +
+                    '">' +
+                    t.replace("-", " ") +
+                    "</span>",
+                )
+                .join("");
 
-            return (
-              '<div class="log-entry" data-player="' + (entry.player || '') + '">' +
-                '<span class="time">' + (entry.time || '') + '</span>' +
-                '<div>' +
-                  '<span class="player">' + (entry.player || '—') + '</span> ' +
-                  '<span class="description">' + escapeHtml(entry.description || '') + '</span>' +
-                  (tagSpans ? '<div class="tags">' + tagSpans + '</div>' : '') +
-                '</div>' +
-                (dkpStr ? '<span class="dkp ' + dkpClass + '">' + dkpStr + '</span>' : '<span class="dkp"></span>') +
-              '</div>'
-            );
-          }).join('');
+              return (
+                '<div class="log-entry" data-player="' +
+                (entry.player || "") +
+                '">' +
+                '<span class="time">' +
+                (entry.time || "") +
+                "</span>" +
+                "<div>" +
+                '<span class="player">' +
+                (entry.player || "—") +
+                "</span> " +
+                '<span class="description">' +
+                escapeHtml(entry.description || "") +
+                "</span>" +
+                (tagSpans ? '<div class="tags">' + tagSpans + "</div>" : "") +
+                "</div>" +
+                (dkpStr
+                  ? '<span class="dkp ' + dkpClass + '">' + dkpStr + "</span>"
+                  : '<span class="dkp"></span>') +
+                "</div>"
+              );
+            })
+            .join("");
         }
 
         function escapeHtml(s) {
-          const div = document.createElement('div');
+          const div = document.createElement("div");
           div.textContent = s;
           return div.innerHTML;
         }
 
         function initFilters(entries) {
-          const playerSelect = document.getElementById('player');
+          const playerSelect = document.getElementById("player");
           const players = buildPlayerOptions(entries);
-          playerSelect.innerHTML = '<option value="">All players</option>' +
-            players.map((p) => '<option value="' + escapeHtml(p) + '">' + escapeHtml(p) + '</option>').join('');
+          playerSelect.innerHTML =
+            '<option value="">All players</option>' +
+            players
+              .map(
+                (p) =>
+                  '<option value="' +
+                  escapeHtml(p) +
+                  '">' +
+                  escapeHtml(p) +
+                  "</option>",
+              )
+              .join("");
 
           const activeActions = new Set(ACTION_TYPES);
-          const tagEls = document.querySelectorAll('.action-tag[data-type]');
+          const tagEls = document.querySelectorAll(".action-tag[data-type]");
 
-          playerSelect.addEventListener('change', () => {
+          playerSelect.addEventListener("change", () => {
             renderEntries(entries, playerSelect.value || null, activeActions);
           });
 
           tagEls.forEach((el) => {
-            el.addEventListener('click', () => {
-              const type = el.getAttribute('data-type');
+            el.addEventListener("click", () => {
+              const type = el.getAttribute("data-type");
               if (activeActions.has(type)) {
                 activeActions.delete(type);
-                el.classList.remove('active');
+                el.classList.remove("active");
               } else {
                 activeActions.add(type);
-                el.classList.add('active');
+                el.classList.add("active");
               }
               renderEntries(entries, playerSelect.value || null, activeActions);
             });
           });
         }
 
-        fetch('log.json')
+        fetch("log.json")
           .then((r) => r.json())
           .then((data) => {
             const entries = data.entries || [];
-            document.getElementById('loading').remove();
+            document.getElementById("loading").remove();
             initFilters(entries);
             renderEntries(entries, null, new Set(ACTION_TYPES));
           })
           .catch((err) => {
-            document.getElementById('log-list').innerHTML =
-              '<div class="empty-state">Failed to load log.json: ' + escapeHtml(String(err)) + '</div>';
+            document.getElementById("log-list").innerHTML =
+              '<div class="empty-state">Failed to load log.json: ' +
+              escapeHtml(String(err)) +
+              "</div>";
           });
       })();
     </script>
